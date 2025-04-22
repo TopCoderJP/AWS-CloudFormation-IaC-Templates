@@ -1,6 +1,5 @@
 Description: AWS CloudFormation Template for a VPC with public and private subnets across two Availability Zones
 
-
 Resources:
 # VPC
   MyVPC:
@@ -12,7 +11,6 @@ Resources:
       Tags:
         - Key: Name
           Value: MyVPC
-
 
 # Public Subnet in AZ1
   PublicSubnet1A:
@@ -26,7 +24,6 @@ Resources:
         - Key: Name
           Value: PublicSubnet1A
 
-
 # App Private Subnet in AZ1
   AppPrivateSubnet1A:
     Type: AWS::EC2::Subnet
@@ -38,7 +35,6 @@ Resources:
       Tags:
         - Key: Name
           Value: AppPrivateSubnet1A
-
 
 # Database Private Subnet in AZ1
   DataPrivateSubnet1A:
@@ -52,7 +48,6 @@ Resources:
         - Key: Name
           Value: DataPrivateSubnet1A
 
-
 # Public Subnet in AZ2
   PublicSubnet1C:
     Type: AWS::EC2::Subnet
@@ -64,7 +59,6 @@ Resources:
       Tags:
         - Key: Name
           Value: PublicSubnet1C
-
 
 # App Private Subnet in AZ2
   AppPrivateSubnet1C:
@@ -78,7 +72,6 @@ Resources:
         - Key: Name
           Value: AppPrivateSubnet1C
 
-
 # Database Private Subnet in AZ2
   DataPrivateSubnet1C:
     Type: AWS::EC2::Subnet
@@ -91,7 +84,6 @@ Resources:
         - Key: Name
           Value: DataPrivateSubnet1C
 
-
 # Internet Gateway
   InternetGateway:
     Type: AWS::EC2::InternetGateway
@@ -100,14 +92,12 @@ Resources:
         - Key: Name
           Value: MyVPC-IGW
 
-
 # Attach Internet Gateway to VPC
   AttachGateway:
     Type: AWS::EC2::VPCGatewayAttachment
     Properties:
       VpcId: !Ref MyVPC
       InternetGatewayId: !Ref InternetGateway
-
 
 # Public Route Table
   PublicRouteTable:
@@ -118,7 +108,6 @@ Resources:
         - Key: Name
           Value: PublicRouteTable
 
-
 # Public Route to Internet
   PublicRoute:
     Type: AWS::EC2::Route
@@ -128,7 +117,6 @@ Resources:
       DestinationCidrBlock: 0.0.0.0/0
       GatewayId: !Ref InternetGateway
 
-
 # Public Subnet 1A Route Table Association
   PublicSubnet1ARouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
@@ -136,15 +124,12 @@ Resources:
       SubnetId: !Ref PublicSubnet1A
       RouteTableId: !Ref PublicRouteTable
 
-
 # Public Subnet 1C Route Table Association
   PublicSubnet1CRouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
       SubnetId: !Ref PublicSubnet1C
       RouteTableId: !Ref PublicRouteTable
-
-         
 
 # Bastion Host EC2
   BastionHost:
@@ -160,7 +145,6 @@ Resources:
         - Key: Name
           Value: BastionHost
          
-
 # Bastion Security Group
   BastionSG:
     Type: 'AWS::EC2::SecurityGroup'
@@ -172,7 +156,6 @@ Resources:
           FromPort: 22
           ToPort: 22
           CidrIp: 110.67.43.13/32
-
 
 # AppInstance1A
   AppInstance1A:
@@ -188,7 +171,6 @@ Resources:
         - Key: Name
           Value: App1    
 
-
 # AppInstance1C
   AppInstance1C:
     Type: 'AWS::EC2::Instance'
@@ -202,7 +184,6 @@ Resources:
         - Key: Name
           Value: App2    
 
-
 # Security Group 1A
   AppInstance1ASG:
     Type: 'AWS::EC2::SecurityGroup'
@@ -214,7 +195,6 @@ Resources:
           FromPort: 22
           ToPort: 22
           SourceSecurityGroupId: !Ref BastionSG
-
 
 # Security Group 1C
   AppInstance1CSG:
