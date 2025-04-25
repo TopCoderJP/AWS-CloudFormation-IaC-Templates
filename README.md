@@ -12,8 +12,8 @@ Available Templates │ 利用可能なテンプレート
 -   rds.yaml - Template for provisioning an RDS database instance.
 -   asg.yaml - Setup for Auto Scaling Group to manage EC2 instances.
 -   iam.yaml - IAM roles and policies definitions.
--   s3-bucket.yaml - Template for creating an S3 bucket.
--   s3-static.yaml - Creates an S3 bucket configured for static website hosting.
+-   s3-bucket.yaml - Template for creating an S3 bucket.
+-   s3-static.yaml - Creates an S3 bucket configured for static website hosting.
 
 Usage │ 使い方
 -----
